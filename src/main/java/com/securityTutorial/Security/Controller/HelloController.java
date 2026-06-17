@@ -3,6 +3,7 @@ package com.securityTutorial.Security.Controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.security.web.server.csrf.CsrfToken;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -33,9 +34,14 @@ public class HelloController {
         list.add(employee);
     }
 
-    @GetMapping("id")
-    public String session(HttpServletRequest req){
-        return "Session ID" + req.getSession().getId();
+    // @GetMapping("id")
+    // public String session(HttpServletRequest req){
+    //     return "Session ID" + req.getSession().getId();
+    // }
+
+    @GetMapping("/csrf")
+    public CsrfToken session(HttpServletRequest req){
+        return (CsrfToken) req.getAttribute("_csrf");
     }
 }
 
